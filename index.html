@@ -1,137 +1,124 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sorry Priye 💛</title>
   <style>
-    /* Background and layout */
     body {
-      margin: 0;
-      overflow: hidden;
-      height: 100vh;
-      background: linear-gradient(135deg, #fff8e7 0%, #fff6cc 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-family: "Poppins", sans-serif;
+      background: linear-gradient(to bottom right, #ffeb99, #fff7e6);
+      font-family: 'Poppins', sans-serif;
       text-align: center;
+      height: 100vh;
+      overflow: hidden;
+      color: #fffaf0; /* off white text */
+    }
+
+    .container {
       position: relative;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     h1 {
-      color: #c59d00;
-      font-size: 28px;
-      margin-bottom: 20px;
-      text-shadow: 0 0 5px rgba(255, 217, 0, 0.4);
-      z-index: 2;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
     }
 
-    img {
-      width: 180px;
-      margin-bottom: 25px;
-      transition: 0.3s ease;
-      z-index: 2;
+    p {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
     }
 
     .buttons {
-      display: flex;
-      gap: 20px;
-      z-index: 2;
+      margin-top: 20px;
     }
 
     button {
-      background-color: #ffca28;
-      color: #5d4037;
+      background-color: #fffaf0;
+      color: #ffcc00;
       border: none;
-      padding: 10px 25px;
-      font-size: 18px;
-      border-radius: 10px;
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 1rem;
+      border-radius: 25px;
       cursor: pointer;
       transition: 0.3s;
-      font-weight: 600;
     }
 
     button:hover {
-      background-color: #ffd54f;
-    }
-
-    #noBtn {
-      position: absolute;
+      transform: scale(1.1);
     }
 
     /* Floating flowers */
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-10vh) rotate(360deg); }
+    }
+
     .flower {
       position: absolute;
       width: 40px;
-      opacity: 0.8;
+      height: 40px;
+      background-size: cover;
       animation: float 10s linear infinite;
-      z-index: 1;
-    }
-
-    @keyframes float {
-      from {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-10vh) rotate(360deg);
-        opacity: 0;
-      }
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
-  <h1>Sorry Priye 😔<br>My intention wasn’t to hurt you.<br>Please maaf krdo 💛</h1>
-  <img id="gif" src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif" alt="Crying GIF">
-  
-  <div class="buttons">
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
+  <div class="container">
+    <h1>Sorry Priye 💛</h1>
+    <p>My intention wasn’t to hurt you, please maaf krdo 😭</p>
+
+    <div class="gif-container">
+      <img id="gif" src="https://media.tenor.com/2roX3uxz_68AAAAC/sad-cat.gif" alt="Crying Gif" width="200" />
+    </div>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
   </div>
 
   <script>
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');
-    const gif = document.getElementById('gif');
-    const heading = document.querySelector('h1');
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const gif = document.getElementById("gif");
 
-    yesBtn.addEventListener('click', () => {
-      gif.src = "https://media.giphy.com/media/111ebonMs90YLu/giphy.gif"; // yay gif
-      heading.innerHTML = "Yay! Thank you Priye ❤️<br>You made me the happiest!";
-    });
-
-    noBtn.addEventListener('mouseover', () => {
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
-    });
-
-    // create floating flowers
-    const flowerEmojis = [
-      '🌸', '🌼', '🌻', '🌹', '🌺', '🌷'
+    // different flower images 🌸🌼🌹🌻🌷
+    const flowerImgs = [
+      "https://cdn-icons-png.flaticon.com/512/616/616408.png", // pink flower
+      "https://cdn-icons-png.flaticon.com/512/765/765524.png", // sunflower
+      "https://cdn-icons-png.flaticon.com/512/4072/4072552.png", // rose
+      "https://cdn-icons-png.flaticon.com/512/4080/4080799.png", // tulip
+      "https://cdn-icons-png.flaticon.com/512/3081/3081875.png"  // lotus
     ];
 
-    function createFlower() {
-      const flower = document.createElement('div');
-      flower.classList.add('flower');
-      flower.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
-      flower.style.left = Math.random() * 100 + 'vw';
-      flower.style.animationDuration = 8 + Math.random() * 6 + 's';
-      flower.style.fontSize = 20 + Math.random() * 20 + 'px';
+    // floating flowers
+    for (let i = 0; i < 20; i++) {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.style.left = Math.random() * 100 + "vw";
+      flower.style.animationDuration = 5 + Math.random() * 5 + "s";
+      flower.style.backgroundImage = url('${flowerImgs[Math.floor(Math.random() * flowerImgs.length)]}');
       document.body.appendChild(flower);
-
-      setTimeout(() => {
-        flower.remove();
-      }, 12000);
     }
 
-    setInterval(createFlower, 400);
+    // “No” button running away 😭
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * window.innerWidth - 100;
+      const y = Math.random() * window.innerHeight - 100;
+      noBtn.style.position = "absolute";
+      noBtn.style.left = ${x}px;
+      noBtn.style.top = ${y}px;
+    });
+
+    // “Yes” button changes gif
+    yesBtn.addEventListener("click", () => {
+      gif.src = "https://media.tenor.com/2nKSTDDekOgAAAAC/cute-happy.gif";
+      document.querySelector("p").innerText = "Yay! I knew you’d forgive me 💛";
+    });
   </script>
 </body>
 </html>
